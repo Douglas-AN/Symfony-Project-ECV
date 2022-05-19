@@ -1,0 +1,16 @@
+controllers:
+    resource: ../src/Controller/
+    type: annotation
+
+kernel:
+    resource: ../src/Kernel.php
+    type: annotation
+
+
+app_hello_world:
+    path: /hello-world
+    controller: App\Controller\HelloController::helloWorld
+
+app_hello_name:
+    path: /hello/{name}
+    controller: App\Controller\HelloController::helloName

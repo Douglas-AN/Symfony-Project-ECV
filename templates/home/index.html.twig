@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!
+{% endblock %}
+
+{% block body %}
+	<style>
+		.navbar {
+			border-bottom: 1px solid #FFF;
+		}
+		body {
+			background-color: #212529;
+			overflow: hidden;
+		}
+		.example-wrapper {
+			display: flex;
+			align-items: center;
+			height: 100vh;
+		}
+		h1 {
+			color: #FFF;
+			font: 40px;
+			font-family: 'Vollkorn', serif;
+			margin: 0 auto;
+			max-width: 40ch;
+			line-height: 2;
+			letter-spacing: 0.1em;
+			margin-bottom: 5em;
+			text-align: center;
+		}
+		span{
+			font: 40px;
+			font-family: 'Vollkorn', serif;
+			color: #D2B48C;
+		}
+	</style>
+
+	<div class="example-wrapper">
+		<h1>Bienvenue sur
+			<span>SBLORT</span>, votre blog exclusivement dédiée au sport!
+		</h1>
+	</div>
+{% endblock %}

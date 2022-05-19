@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sport{% endblock %}
+
+{% block body %}
+    <h1>{{ sport.name }}</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Joueurs</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{sport}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a class="btn btn-dark" href="{{ path('app_sport_index') }}">back to list</a>
+
+    <a class="btn btn-success" href="{{ path('app_sport_edit', {'id': sport.id}) }}">edit</a>
+
+    {{ include('sport/_delete_form.html.twig') }}
+{% endblock %}
