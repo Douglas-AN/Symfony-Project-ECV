@@ -25,7 +25,9 @@
             </tr>
             <tr>
                 <th>Sport</th>
-                <td>{{ user }}</td>
+                {% for sport in user.sports %}
+					<td>{{sport.name}}</td>
+				{% endfor %}
             </tr>
         </tbody>
     </table>

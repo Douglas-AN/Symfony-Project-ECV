@@ -1,26 +1,43 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Sport{% endblock %}
+{% block title %}Sport
+{% endblock %}
 
 {% block body %}
-    <h1>{{ sport.name }}</h1>
+	<h1>{{ sport.name }}</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Joueurs</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>{{sport}}</td>
-            </tr>
-        </tbody>
-    </table>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Joueurs</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for user in sport.users %}
+				<tr>
+					<td>
+						<figure class="fir-image-figure">
+							<img class="fir-author-image fir-clickcircle" src="{{user.img}}" alt="David East - Author">
+							<figcaption>
+								<div class="fig-author-figure-title">{{user.lastname}}
+									{{user.firstname}}</div>
+								<div class="fig-author-figure-title">{{user.work}}</div>
+							</figcaption>
+						</figure>
+					</td>
+					<td>
+						<a class="btn btn-dark" href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
+						<a class="btn btn-primary" href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
+					</td>
+				</tr>
+			{% endfor %}
 
-    <a class="btn btn-dark" href="{{ path('app_sport_index') }}">back to list</a>
+		</tbody>
+	</table>
 
-    <a class="btn btn-success" href="{{ path('app_sport_edit', {'id': sport.id}) }}">edit</a>
+	<a class="btn btn-dark" href="{{ path('app_sport_index') }}">back to list</a>
 
-    {{ include('sport/_delete_form.html.twig') }}
+	<a class="btn btn-success" href="{{ path('app_sport_edit', {'id': sport.id}) }}">edit</a>
+
+	{{ include('sport/_delete_form.html.twig') }}
 {% endblock %}

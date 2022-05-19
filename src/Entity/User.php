@@ -21,14 +21,14 @@ class User
     #[ORM\Column(type: 'string', length: 255)]
     private $lastname;
 
-    #[ORM\ManyToMany(targetEntity: Sport::class, mappedBy: 'users')]
-    private $sports;
-
     #[ORM\Column(type: 'string', length: 255)]
     private $work;
 
     #[ORM\Column(type: 'string', length: 255)]
     private $img;
+
+    #[ORM\ManyToMany(targetEntity: Sport::class, inversedBy: 'users')]
+    private $sports;
 
     public function __construct()
     {
@@ -62,31 +62,6 @@ class User
         return $this;
     }
 
-    /**
-     * @return Collection<int, Sport>
-     */
-    public function getSports(): Collection
-    {
-        return $this->sports;
-    }
-
-    public function addSport(Sport $sport): self
-    {
-        if (!$this->sports->contains($sport)) {
-            $this->sports[] = $sport;
-            $sport->addUser($this);
-        }
-        return $this;
-    }
-
-    public function removeSport(Sport $sport): self
-    {
-        if ($this->sports->removeElement($sport)) {
-            $sport->removeUser($this);
-        }
-        return $this;
-    }
-
     public function __toString()
     {
         return $this->firstname;
@@ -112,6 +87,33 @@ class User
     public function setImg(string $img): self
     {
         $this->img = $img;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Sport>
+     */
+    public function getSports(): Collection
+    {
+        return $this->sports;
+    }
+
+    public function addSport(Sport $sport): self
+    {
+        if (!$this->sports->contains($sport)) {
+            $this->sports[] = $sport;
+            $sport->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSport(Sport $sport): self
+    {
+        if ($this->sports->removeElement($sport)) {
+            $sport->removeUser($this);
+        }
 
         return $this;
     }

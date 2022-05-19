@@ -18,14 +18,14 @@ class Sport
     #[ORM\Column(type: 'string', length: 255)]
     private $name;
 
-    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'sports')]
-    private $users;
-
     #[ORM\Column(type: 'string', length: 255)]
     private $url;
 
     #[ORM\Column(type: 'string', length: 255)]
     private $description;
+
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'sports')]
+    private $users;
 
     public function __construct()
     {
@@ -45,29 +45,6 @@ class Sport
     public function setName(string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, User>
-     */
-    public function getUsers(): Collection
-    {
-        return $this->users;
-    }
-
-    public function addUser(User $user): self
-    {
-        if (!$this->users->contains($user)) {
-            $this->users[] = $user;
-        }
-        return $this;
-    }
-
-    public function removeUser(User $user): self
-    {
-        $this->users->removeElement($user);
 
         return $this;
     }
@@ -97,6 +74,30 @@ class Sport
     public function setDescription(string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        $this->users->removeElement($user);
 
         return $this;
     }
